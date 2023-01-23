@@ -1,0 +1,17 @@
+{% extends "wrapper.html" %}
+
+{% block title%}
+Books
+{% endblock%}
+
+{% block main%}
+{% if user.is_authenticated %}
+<h1 style="text-align: center;">{{ book.name }} ({{ book.count }})</h1>
+<h5 style="text-align: center;">{{ book.book_authors }}</h5>
+<br>
+<h4 style="text-align: center;">Description:</h4>
+<p style="text-align: center;">{{ book.description }}<p>
+{% else %}
+<h1 style="text-align: center;">Please log in / sign up</h1>
+{% endif %}
+{% endblock%}

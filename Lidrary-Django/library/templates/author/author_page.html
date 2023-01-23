@@ -1,0 +1,25 @@
+{% extends "../wrapper.html" %}
+
+{% block title %}
+Authors
+{% endblock %}
+
+{% block main %}
+{% if user.is_authenticated%}
+{% if user.role == 1  %}
+<h1 class='d-flex align-items-center justify-content-center'>Authors</h1>
+
+<div class="container-fluid d-flex justify-content-around">
+    <a href="{% url 'author:all_authors' %}"><button type="button" 
+        class="btn btn-primary btn-lg btn-block">All authors</button></a>
+        <a href="{% url 'author:create_author_page' %}"><button type="button" 
+            class="btn btn-primary btn-lg btn-block">Create author</button></a>
+
+</div>
+{% else %}
+<h1 style="text-align: center;">You are not admin( Sorry.</h1>
+{% endif %}
+{% else %}
+<h1 style="text-align: center;">Please log in / sign up</h1>
+{% endif %}
+{% endblock %}

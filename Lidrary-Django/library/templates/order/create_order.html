@@ -1,0 +1,41 @@
+{% extends "../wrapper.html" %}
+
+{% block title %}
+Create order
+{% endblock %}
+
+{% block main %}
+<h1>Create order</h1>
+
+
+<form method="POST" action="{% url 'order:create_order' %}">
+    {% csrf_token %}
+      <label for="book_id" class="form-label">Book Id</label>
+      <input type="number" class="form-control" name="book_id">
+
+      <div class="mb-3">
+        <label for="user_id" class="form-label">User Id</label>
+        <input type="number" class="form-control" name="user_id" value={{user.pk}} readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="plated_end_at" class="form-label">Plated end at</label>
+        <input type="datetime-local" name="plated_end_at" 
+        value="2022-11-17T00:00" min="2022-11-17T00:00">
+      </div>
+
+      <div class="mb-3">
+        <label for="end_at" class="form-label">End at</label>
+        <input type="datetime-local" name="end_at" 
+        value="2022-11-17T00:00" min="2022-11-17T00:00">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="{% url 'order:all_orders' %}"><button type="button" 
+        class="btn btn-primary">Show all orders</button></a>
+  </form>
+  <h3 class='d-flex align-items-center justify-content-center'>{{message}}</h3>
+
+{% endblock %}
+
+
+

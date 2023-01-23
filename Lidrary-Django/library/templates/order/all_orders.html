@@ -1,0 +1,67 @@
+{% extends "../wrapper.html" %}
+
+{% block title %}
+All orders
+{% endblock %}
+
+{% block main %}
+{% if user.is_authenticated%}
+{% if user.role == 1 %}
+<h1>All orders</h1>
+<table border="1" class="table table-striped">
+    <thead>
+        <th>Order Id</th>
+        <th>Book Id</th>
+        <th>User Id</th>
+        <th>Creted at</th>
+        <th>Planned end at</th>
+        <th>End at</th>
+        
+    </thead>
+    {% for order in orders %}
+        <tr>
+            <td>{{order.pk}}</td>
+            <td>{{order.book.pk}}</td>
+            <td>{{order.user.pk}}</td>
+            <td>{{order.created_at}}</td>
+            <td>{{order.plated_end_at}}</td>
+            {% if order.end_at == None %}
+            <td><a href="{% url 'order:close_order' order.pk %}"><button type="button" 
+                class="btn btn-primary">Close order</button></a></td>
+            {% else %}
+            <td>{{order.end_at}}</td>
+            {% endif %}  
+        </tr>
+    {% endfor %}      
+</table>
+{% else %}
+<h1>My orders</h1>
+<table border="1" class="table table-striped">
+    <thead>
+        <th>Order Id</th>
+        <th>Book Id</th>
+        <th>Creted at</th>
+        <th>Planned end at</th>
+        <th>End at</th>
+    </thead>
+    {% for order in orders %}
+    {% if order.user.pk == user.pk %}
+        <tr>
+            <td>{{order.pk}}</td>
+            <td>{{order.book.pk}}</td>
+            <td>{{order.created_at}}</td>
+            <td>{{order.plated_end_at}}</td>
+            <td>{{order.end_at}}</td>
+        </tr>
+     {% endif %}   
+    {% endfor %}      
+</table>
+<div class="d-flex align-items-center justify-content-center">
+    <a href="{% url 'order:create_order_page' %}"><button type="button" 
+        class="btn btn-primary">Create order</button></a>
+</div>
+{% endif %}
+{% else %}
+<h1 style="text-align: center;">Please log in / sign up</h1>
+{% endif %}
+{% endblock %}

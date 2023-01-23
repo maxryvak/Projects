@@ -1,0 +1,33 @@
+{% extends "../wrapper.html" %}
+
+{% block title %}
+Create author
+{% endblock %}
+
+{% block main %}
+<h1>Create author</h1>
+
+
+<form method="POST" action="{% url 'author:create_author' %}">
+    {% csrf_token %}
+      <label for="namee" class="form-label">Author name</label>
+      <input type="text" class="form-control" name="namee" required>
+
+    <div class="mb-3">
+        <label for="surnamee" class="form-label">Author surname</label>
+        <input type="text" class="form-control" name="surnamee" required>
+      </div>
+      <div class="mb-3">
+        <label for="patronymice" class="form-label">Author patronymic</label>
+        <input type="text" class="form-control" name="patronymice">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="{% url 'author:all_authors' %}"><button type="button" 
+        class="btn btn-primary">Show all authors</button></a>
+  </form>
+  <h3 class='d-flex align-items-center justify-content-center'>{{message}}</h3>
+
+{% endblock %}
+
+
+

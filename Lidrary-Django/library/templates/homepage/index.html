@@ -1,0 +1,14 @@
+{% extends "wrapper.html" %}
+
+{% block title%}
+Home
+{% endblock%}
+
+{% block main%}
+{% if user.is_authenticated %}
+<h1 style="text-align: center;">Hello{{fname}}!</h1>
+<h2 style="text-align: center;">Welcome to the library!</h2>
+{% else %}
+<h1 style="text-align: center;">Welcome to the library!</h1>
+{% endif %}
+{% endblock%}
